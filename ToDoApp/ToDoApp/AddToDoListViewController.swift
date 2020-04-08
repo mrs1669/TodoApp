@@ -7,16 +7,24 @@
 //
 
 import UIKit
-var toDoList = [String]()
+import RealmSwift
+
+//var toDoList = [String]()
 class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
+    var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         textField.delegate = self
+        
+        // RealmのTodoリストを取得
+        let realm = try! Realm()
+        toDoLists = realm.objects(ToDoModel.self)
+        //print(toDoLists)
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,10 +37,26 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func AddToDoList(_ sender: Any) {
-        toDoList.append(self.textField.text!)
+        let realm = try! Realm()
+        let toDoModel:ToDoModel = ToDoModel()
+        toDoModel.title = textField.text!
+        
+        try! realm.write({
+            realm.add(toDoModel)
+        })
+        textField.text = ""
+        //print(toDoModel.title)
+        
+        /*toDoList.append(self.textField.text!)
         print(toDoList)
         textField.text = ""
-        UserDefaults.standard.set(toDoList, forKey: "ToDoList")
+        UserDefaults.standard.set(toDoList, forKey: "ToDoList")*/
     }
     
+    func cheakToDoList(completion: @escaping (Results<ToDoModel>) -> Void) {
+        let realm = try! Realm()
+        self.toDoLists = realm.objects(ToDoModel.self)
+        //print(toDoLists as Any)
+        completion(self.toDoLists)
+    }
 }
