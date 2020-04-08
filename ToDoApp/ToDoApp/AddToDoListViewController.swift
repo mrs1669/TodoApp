@@ -24,7 +24,6 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         // RealmのTodoリストを取得
         let realm = try! Realm()
         toDoLists = realm.objects(ToDoModel.self)
-        //print(toDoLists)
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,18 +44,12 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
             realm.add(toDoModel)
         })
         textField.text = ""
-        //print(toDoModel.title)
         
-        /*toDoList.append(self.textField.text!)
-        print(toDoList)
-        textField.text = ""
-        UserDefaults.standard.set(toDoList, forKey: "ToDoList")*/
     }
     
     func cheakToDoList(completion: @escaping (Results<ToDoModel>) -> Void) {
         let realm = try! Realm()
         self.toDoLists = realm.objects(ToDoModel.self)
-        //print(toDoLists as Any)
         completion(self.toDoLists)
     }
 }
