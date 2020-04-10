@@ -8,15 +8,19 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
 
 class ToDoListViewController: UITableViewController {
     
     var addToDoListViewController = AddToDoListViewController()
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
+    var observable : Observable<String>!
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        print(Realm.Configuration.defaultConfiguration.fileURL!) // realmファイルのパスを取得してrealm blowserで確認
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +29,7 @@ class ToDoListViewController: UITableViewController {
             self.toDoLists = toDoLists
             print(self.toDoLists as Any)
         })
+        
         tableView.reloadData()
     }
     
@@ -50,8 +55,8 @@ class ToDoListViewController: UITableViewController {
             try! realm.write({
                 realm.delete(self.toDoLists[indexPath.row])
             })
-            
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+            print(self.toDoLists as Any)
         }
     }
 }
