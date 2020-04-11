@@ -25,10 +25,17 @@ class ToDoListViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addToDoListViewController.cheakToDoList(completion: { toDoLists in
+        
+        addToDoListViewController.newCheckToDoList().subscribe(onNext : { toDoLists in
+            print(toDoLists)
             self.toDoLists = toDoLists
-            print(self.toDoLists as Any)
-        })
+        }, onError : { error in
+            print(error)
+        }, onCompleted:{
+            print("completed")
+        }, onDisposed: {
+            print("disposed")
+        }).disposed(by: disposeBag)
         
         tableView.reloadData()
     }

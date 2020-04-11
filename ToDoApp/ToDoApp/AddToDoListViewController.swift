@@ -23,6 +23,8 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         textField.delegate = self
+        textField.placeholder = "ToDoリストに追加したいことを入力してください"
+        
         // RealmのTodoリストを取得
         let realm = try! Realm()
         toDoLists = realm.objects(ToDoModel.self)
@@ -39,56 +41,27 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func AddToDoList(_ sender: Any) {
         
-        writeRealm().subscribe(onNext : { title in
-            print(title)
-        }, onError : { error in
-            print(error)
-        }, onCompleted:{
-            print("completed")
-        }, onDisposed: {
-            print("disposed")
-        }).disposed(by: disposeBag)
+        let realm = try! Realm()
+        let toDoModel:ToDoModel = ToDoModel()
+        
+        toDoModel.title = self.textField.text!
+        
+        try! realm.write({ // データベースへの書き込み
+            realm.add(toDoModel)
+        })
         
         textField.text = ""
         
     }
     
-    func cheakToDoList(completion: @escaping (Results<ToDoModel>) -> Void) {
-        let realm = try! Realm()
-        self.toDoLists = realm.objects(ToDoModel.self)
-        completion(self.toDoLists)
-    }
-    
-    // この中で将来はRxSwiftを使う
-    func writeRealm() -> Observable<String> {
+    func newCheckToDoList() -> Observable<Results<ToDoModel>>{
         return Observable.create({ observer in
             let realm = try! Realm()
-            let toDoModel:ToDoModel = ToDoModel()
-            toDoModel.title = self.textField.text!
-            
-            try! realm.write({
-                realm.add(toDoModel)
-                observer.onNext(toDoModel.title)
-                observer.onCompleted()
-            })
+            self.toDoLists = realm.objects(ToDoModel.self)
+            observer.onNext(self.toDoLists)
+            observer.onCompleted()
             return Disposables.create()
-            })
-        /*let realm = try! Realm()
-        let toDoModel:ToDoModel = ToDoModel()
-        toDoModel.title = textField.text!*/
-        
-        /*try! realm.write({
-            realm.add(toDoModel)
-            observable = Observable.of(toDoModel.title)
-        })*/
-        
-        /*observable.subscribe(onNext:{ element in
-            print(element)
-        }, onError:{ error in
-            print(error)
-        }, onCompleted:{
-            print("completed")
-        }).disposed(by: disposeBag)*/
-        
+        })
     }
+    
 }
