@@ -14,10 +14,14 @@ import RxSwift
 class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     var observable:Observable<String>!
     let disposeBag = DisposeBag()
+    var calendar = Calendar(identifier: .gregorian)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +29,23 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view.
         textField.delegate = self
         textField.placeholder = "ToDoリストに追加したいことを入力してください"
-        
+        //checkButton.isEnabled = false
         // RealmのTodoリストを取得
         let realm = try! Realm()
         toDoLists = realm.objects(ToDoModel.self)
+        datePicker.locale = Locale(identifier: "ja_JP")
+        //textField.inputView = datePicker
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if textField.text == ""{
+            checkButton.isEnabled = false
+        }
+        else{
+            checkButton.isEnabled = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,6 +54,16 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.text == ""{
+            checkButton.isEnabled = false
+        }
+        else{
+            checkButton.isEnabled = true
+        }
         return true
     }
     
@@ -50,7 +77,17 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
             realm.add(toDoModel)
         })
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        textField.text = "\(formatter.string(from: datePicker.date))"
+        
         textField.text = ""
+        textField.placeholder = "ToDoリストに追加したいことを入力してください"
+        //checkButton.isEnabled = false
+    }
+    
+    @IBAction func dateChanged(_ sender: Any) {
+        dateLabel.text = self.format(date: datePicker.date)
     }
     
     func newCheckToDoList() -> Observable<Results<ToDoModel>>{
@@ -61,6 +98,16 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
             observer.onCompleted()
             return Disposables.create()
         })
+    }
+    
+    // UIDatePickerViewから年月日・日時を取得
+    func format(date:Date)->String{
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy/MM/dd  HH:mm"
+        let strDate = dateformatter.string(from: date)
+        
+        return strDate
     }
     
 }

@@ -32,7 +32,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rdt-tC-JfL">
-                                <rect key="frame" x="52" y="431" width="311" height="34"/>
+                                <rect key="frame" x="52" y="165" width="311" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -46,18 +46,35 @@
                                     <action selector="AddToDoList:" destination="h7w-Kj-f27" eventType="touchUpInside" id="dBu-k4-9bc"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1lN-cX-CPq">
+                                <rect key="frame" x="0.0" y="353" width="414" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="dateChanged:" destination="h7w-Kj-f27" eventType="valueChanged" id="pc9-MM-geB"/>
+                                </connections>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvO-8A-Kcg">
+                                <rect key="frame" x="52" y="198" width="311" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Bb6-eo-cyv"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Add" id="tBL-Ou-kaW"/>
                     <connections>
+                        <outlet property="checkButton" destination="h2D-3B-Gjk" id="hJc-1m-SCi"/>
+                        <outlet property="dateLabel" destination="bvO-8A-Kcg" id="pEK-Rg-EFS"/>
+                        <outlet property="datePicker" destination="1lN-cX-CPq" id="IUc-2V-KSu"/>
                         <outlet property="textField" destination="Rdt-tC-JfL" id="d5T-vl-1Uu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGz-AY-elL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="857" y="1040"/>
+            <point key="canvasLocation" x="856.52173913043487" y="1039.9553571428571"/>
         </scene>
         <!--ToDoLists-->
         <scene sceneID="rb2-9J-AZj">
