@@ -14,6 +14,7 @@ import RxSwift
 class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
+    
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     var observable:Observable<String>!
     let disposeBag = DisposeBag()
@@ -40,7 +41,6 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func AddToDoList(_ sender: Any) {
-        
         let realm = try! Realm()
         let toDoModel:ToDoModel = ToDoModel()
         
@@ -51,7 +51,6 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         })
         
         textField.text = ""
-        
     }
     
     func newCheckToDoList() -> Observable<Results<ToDoModel>>{
