@@ -11,4 +11,5 @@ import RealmSwift
 
 class ToDoModel : Object {
     @objc dynamic var title = ""
+    @objc dynamic var date = ""
 }
