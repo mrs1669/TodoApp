@@ -10,23 +10,23 @@ import UIKit
 import RealmSwift
 import RxSwift
 
-//var toDoList = [String]()
 class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
-    
+    let currentDateFormatter = DateFormatter()
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     var observable:Observable<String>!
     let disposeBag = DisposeBag()
-    var calendar = Calendar(identifier: .gregorian)
+    //var calendar = Calendar(identifier: .gregorian)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        currentDateFormatter.dateFormat = /*DateFormatter.dateFormat(fromTemplate: */"yyyy/MM/dd  HH:mm"/*, options: 0, locale: Locale(identifier: "ja_JP"))*/
         textField.delegate = self
         textField.placeholder = "ToDoリストに追加したいことを入力してください"
         //checkButton.isEnabled = false
@@ -34,7 +34,8 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         let realm = try! Realm()
         toDoLists = realm.objects(ToDoModel.self)
         datePicker.locale = Locale(identifier: "ja_JP")
-        //textField.inputView = datePicker
+        dateLabel.text = currentDateFormatter.string(from: Date())
+        
         
     }
     
@@ -67,7 +68,12 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         return true
     }
     
+    @IBAction func tapLabel(_ sender: Any) {
+        
+    }
+    
     @IBAction func AddToDoList(_ sender: Any) {
+        
         let realm = try! Realm()
         let toDoModel:ToDoModel = ToDoModel()
         
@@ -83,7 +89,7 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         
         textField.text = ""
         textField.placeholder = "ToDoリストに追加したいことを入力してください"
-        //checkButton.isEnabled = false
+        checkButton.isEnabled = false
     }
     
     @IBAction func dateChanged(_ sender: Any) {
