@@ -9,6 +9,5 @@ target 'ToDoApp' do
   pod 'RealmSwift'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'FSCalendar'
 
 end

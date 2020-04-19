@@ -1,5 +1,4 @@
 PODS:
-  - FSCalendar (2.8.1)
   - Realm (4.4.1):
     - Realm/Headers (= 4.4.1)
   - Realm/Headers (4.4.1)
@@ -13,14 +12,12 @@ PODS:
   - RxSwift (5.1.1)
 
 DEPENDENCIES:
-  - FSCalendar
   - RealmSwift
   - RxCocoa
   - RxSwift
 
 SPEC REPOS:
   trunk:
-    - FSCalendar
     - Realm
     - RealmSwift
     - RxCocoa
@@ -28,13 +25,12 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
-  FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
   Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
   RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: 5d5e249e4c76fe3313c732d55c3b3d1b26d01739
+PODFILE CHECKSUM: d6ce9feeddcf5d466f308123166313990ecb6f87
 
 COCOAPODS: 1.9.1
