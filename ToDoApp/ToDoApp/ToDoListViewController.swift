@@ -51,6 +51,7 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoCell", for: indexPath)
         cell.textLabel?.text = self.toDoLists?[indexPath.row].title
+        cell.detailTextLabel?.text = self.toDoLists[indexPath.row].date
         return cell
     }
     

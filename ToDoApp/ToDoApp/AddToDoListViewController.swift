@@ -78,14 +78,14 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         let toDoModel:ToDoModel = ToDoModel()
         
         toDoModel.title = self.textField.text!
-        
+        toDoModel.date = self.format(date: datePicker.date)
         try! realm.write({ // データベースへの書き込み
             realm.add(toDoModel)
         })
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        textField.text = "\(formatter.string(from: datePicker.date))"
+        //let formatter = DateFormatter()
+        //formatter.dateFormat = "yyyy-MM-dd"
+        //textField.text = "\(formatter.string(from: datePicker.date))"
         
         textField.text = ""
         textField.placeholder = "ToDoリストに追加したいことを入力してください"
