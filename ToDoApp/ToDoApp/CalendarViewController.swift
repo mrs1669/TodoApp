@@ -8,20 +8,18 @@
 
 import UIKit
 import RealmSwift
-import RxSwift
 import FSCalendar
 import CalculateCalendarLogic
 
-class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var todayScheduleTableView: UITableView!
     let calendarViewModel = CalendarViewModel()
     let dayOfTheWeeks = ["日":0, "月":1, "火":2, "水":3, "木":4, "金":5, "土":6]
     var toDoLists : Results<ToDoModel>!
-    var addToDoListViewController = AddToDoListViewController()
-    let disposeBag = DisposeBag()
-    
+    let realm = try! Realm() // RealmのTodoリストを取得
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,19 +27,23 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         calendar.delegate = self
         calendar.dataSource = self
         calendar.appearance.headerDateFormat = "yyyy年MM月"
+        todayScheduleTableView.delegate = self
+        todayScheduleTableView.dataSource = self
         
         for (key, value) in self.dayOfTheWeeks {
             self.calendar.calendarWeekdayView.weekdayLabels[value].text = key
         }
         
         // RealmのTodoリストを取得
-        let realm = try! Realm()
         toDoLists = realm.objects(ToDoModel.self)
+        
+        let todayFilter = "\(calendarViewModel.getYear(date: Date()))/\(calendarViewModel.getMonth(date: Date()))/\(calendarViewModel.getDay(date: Date()))"
+        toDoLists = toDoLists.filter("date LIKE '\(todayFilter)*' ")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        super.viewWillAppear(true)
+        todayScheduleTableView.reloadData()
     }
     
     // 土日・祝日の文字色を変える
@@ -64,14 +66,19 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     // カレンダーのタップイベント
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        // RealmのTodoリストを取得
-        let realm = try! Realm()
-        toDoLists = realm.objects(ToDoModel.self)
-        let todayFilter = "\(calendarViewModel.getYear(date: date))/\(calendarViewModel.getMonth(date: date))/\(calendarViewModel.getDay(date: date))"
-        print(todayFilter)
-        toDoLists = toDoLists.filter("date LIKE '\(todayFilter)*' ")
-        print(toDoLists)
-        
+        toDoLists = calendarViewModel.searchToDoList(date: date)
+        print(toDoLists as Any)
+        self.todayScheduleTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toDoLists.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = todayScheduleTableView.dequeueReusableCell(withIdentifier: "todayScheduleCell", for: indexPath)
+        cell.textLabel?.text = toDoLists[indexPath.row].title
+        return cell
     }
     
 }

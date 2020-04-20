@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		444B7510244C929900291578 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B750F244C929900291578 /* CalendarViewController.swift */; };
 		444B7512244C9B7500291578 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B7511244C9B7500291578 /* CalendarViewModel.swift */; };
+		4479EC7E244DAB1B001D61AE /* AddToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479EC7D244DAB1B001D61AE /* AddToDoListViewModel.swift */; };
 		44A53F59243B159700A84E77 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A53F58243B159700A84E77 /* ToDoListViewController.swift */; };
 		44A53F5B243B1B6900A84E77 /* ToDoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A53F5A243B1B6900A84E77 /* ToDoModel.swift */; };
 		44A53F5D243B1FA400A84E77 /* AddToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A53F5C243B1FA400A84E77 /* AddToDoListViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		444B750F244C929900291578 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		444B7511244C9B7500291578 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		4479EC7D244DAB1B001D61AE /* AddToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoListViewModel.swift; sourceTree = "<group>"; };
 		44A53F58243B159700A84E77 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		44A53F5A243B1B6900A84E77 /* ToDoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoModel.swift; sourceTree = "<group>"; };
 		44A53F5C243B1FA400A84E77 /* AddToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoListViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				444B750F244C929900291578 /* CalendarViewController.swift */,
 				444B7511244C9B7500291578 /* CalendarViewModel.swift */,
 				44A53F5C243B1FA400A84E77 /* AddToDoListViewController.swift */,
+				4479EC7D244DAB1B001D61AE /* AddToDoListViewModel.swift */,
 				44A53F5A243B1B6900A84E77 /* ToDoModel.swift */,
 				44A53F58243B159700A84E77 /* ToDoListViewController.swift */,
 				44C08576243A0727008CD46B /* Assets.xcassets */,
@@ -222,6 +225,7 @@
 				44C0856E243A071A008CD46B /* AppDelegate.swift in Sources */,
 				44A53F5D243B1FA400A84E77 /* AddToDoListViewController.swift in Sources */,
 				44A53F5B243B1B6900A84E77 /* ToDoModel.swift in Sources */,
+				4479EC7E244DAB1B001D61AE /* AddToDoListViewModel.swift in Sources */,
 				44A53F59243B159700A84E77 /* ToDoListViewController.swift in Sources */,
 				44C08570243A071A008CD46B /* SceneDelegate.swift in Sources */,
 				444B7512244C9B7500291578 /* CalendarViewModel.swift in Sources */,
