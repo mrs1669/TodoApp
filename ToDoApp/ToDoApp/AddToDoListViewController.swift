@@ -20,22 +20,20 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     var observable:Observable<String>!
     let disposeBag = DisposeBag()
-    //var calendar = Calendar(identifier: .gregorian)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        currentDateFormatter.dateFormat = /*DateFormatter.dateFormat(fromTemplate: */"yyyy/MM/dd  HH:mm"/*, options: 0, locale: Locale(identifier: "ja_JP"))*/
+        currentDateFormatter.dateFormat = "yyyy/MM/dd  HH:mm"
         textField.delegate = self
         textField.placeholder = "ToDoリストに追加したいことを入力してください"
-        //checkButton.isEnabled = false
+        checkButton.isEnabled = false
         // RealmのTodoリストを取得
         let realm = try! Realm()
         toDoLists = realm.objects(ToDoModel.self)
         datePicker.locale = Locale(identifier: "ja_JP")
         dateLabel.text = currentDateFormatter.string(from: Date())
-        
         
     }
     
@@ -82,10 +80,6 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         try! realm.write({ // データベースへの書き込み
             realm.add(toDoModel)
         })
-        
-        //let formatter = DateFormatter()
-        //formatter.dateFormat = "yyyy-MM-dd"
-        //textField.text = "\(formatter.string(from: datePicker.date))"
         
         textField.text = ""
         textField.placeholder = "ToDoリストに追加したいことを入力してください"
