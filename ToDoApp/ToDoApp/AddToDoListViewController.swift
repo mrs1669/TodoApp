@@ -17,9 +17,8 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
     let currentDateFormatter = DateFormatter()
+    let addToDoListViewModel = AddToDoListViewModel()
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
-    var observable:Observable<String>!
-    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,17 +65,13 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
         return true
     }
     
-    @IBAction func tapLabel(_ sender: Any) {
-        
-    }
-    
     @IBAction func AddToDoList(_ sender: Any) {
         
         let realm = try! Realm()
         let toDoModel:ToDoModel = ToDoModel()
         
         toDoModel.title = self.textField.text!
-        toDoModel.date = self.format(date: datePicker.date)
+        toDoModel.date = addToDoListViewModel.format(date: datePicker.date)
         try! realm.write({ // データベースへの書き込み
             realm.add(toDoModel)
         })
@@ -87,27 +82,7 @@ class AddToDoListViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func dateChanged(_ sender: Any) {
-        dateLabel.text = self.format(date: datePicker.date)
-    }
-    
-    func newCheckToDoList() -> Observable<Results<ToDoModel>>{
-        return Observable.create({ observer in
-            let realm = try! Realm()
-            self.toDoLists = realm.objects(ToDoModel.self)
-            observer.onNext(self.toDoLists)
-            observer.onCompleted()
-            return Disposables.create()
-        })
-    }
-    
-    // UIDatePickerViewから年月日・日時を取得
-    func format(date:Date)->String{
-        
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy/MM/dd  HH:mm"
-        let strDate = dateformatter.string(from: date)
-        
-        return strDate
+        dateLabel.text = addToDoListViewModel.format(date: datePicker.date)
     }
     
 }

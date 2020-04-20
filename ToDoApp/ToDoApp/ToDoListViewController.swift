@@ -12,7 +12,7 @@ import RxSwift
 
 class ToDoListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var addToDoListViewController = AddToDoListViewController()
+    var addToDoListViewModel = AddToDoListViewModel()
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     var observable : Observable<String>!
     let disposeBag = DisposeBag()
@@ -30,7 +30,7 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        addToDoListViewController.newCheckToDoList().subscribe(onNext : { toDoLists in
+        addToDoListViewModel.newCheckToDoList().subscribe(onNext : { toDoLists in
             print(toDoLists)
             self.toDoLists = toDoLists
         }, onError : { error in
