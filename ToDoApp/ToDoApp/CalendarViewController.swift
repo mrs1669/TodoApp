@@ -33,7 +33,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         for (key, value) in self.dayOfTheWeeks {
             self.calendar.calendarWeekdayView.weekdayLabels[value].text = key
         }
-        
+    
         // RealmのTodoリストを取得
         toDoLists = realm.objects(ToDoModel.self)
         
@@ -44,6 +44,7 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         todayScheduleTableView.reloadData()
+        calendar.reloadData()
     }
     
     // 土日・祝日の文字色を変える
@@ -69,6 +70,13 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         toDoLists = calendarViewModel.searchToDoList(date: date)
         print(toDoLists as Any)
         self.todayScheduleTableView.reloadData()
+    }
+    
+    // 予定がある日にカレンダーに点を描画
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int{
+        var plansToDoLists : Results<ToDoModel>
+        plansToDoLists = calendarViewModel.searchToDoList(date: date)
+        return plansToDoLists.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

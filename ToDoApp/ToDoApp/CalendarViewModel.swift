@@ -7,9 +7,7 @@
 //
 
 import Foundation
-import FSCalendar
 import CalculateCalendarLogic
-import RxSwift
 import RealmSwift
 
 class CalendarViewModel {
@@ -57,7 +55,8 @@ class CalendarViewModel {
     }
     
     // タップされたカレンダーの日付を受け取って、Realmに問い合わせをする。
-    // 日付で格納させているデータを検索して、ヒットしたリストを返す
+    // 日付で格納させているデータを検索して、ヒットしたリストを返す。
+    // つまりは、予定のある日だけのデータを抽出する。
     func searchToDoList(date : Date) -> Results<ToDoModel>{
         let realm = try! Realm()
         self.toDoLists = realm.objects(ToDoModel.self)
