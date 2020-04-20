@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import RealmSwift
+import RxSwift
 import FSCalendar
 import CalculateCalendarLogic
 
 class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var todayScheduleTableView: UITableView!
     let calendarViewModel = CalendarViewModel()
     let dayOfTheWeeks = ["日":0, "月":1, "火":2, "水":3, "木":4, "金":5, "土":6]
+    var toDoLists : Results<ToDoModel>!
+    var addToDoListViewController = AddToDoListViewController()
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +33,15 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         for (key, value) in self.dayOfTheWeeks {
             self.calendar.calendarWeekdayView.weekdayLabels[value].text = key
         }
+        
+        // RealmのTodoリストを取得
+        let realm = try! Realm()
+        toDoLists = realm.objects(ToDoModel.self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     // 土日・祝日の文字色を変える
@@ -47,5 +62,16 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         return nil
     }
     
+    // カレンダーのタップイベント
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        // RealmのTodoリストを取得
+        let realm = try! Realm()
+        toDoLists = realm.objects(ToDoModel.self)
+        let todayFilter = "\(calendarViewModel.getYear(date: date))/\(calendarViewModel.getMonth(date: date))/\(calendarViewModel.getDay(date: date))"
+        print(todayFilter)
+        toDoLists = toDoLists.filter("date LIKE '\(todayFilter)*' ")
+        print(toDoLists)
+        
+    }
     
 }
