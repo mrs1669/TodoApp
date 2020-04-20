@@ -52,6 +52,7 @@
                     <tabBarItem key="tabBarItem" title="Calendar" id="sCI-kg-Mjs"/>
                     <connections>
                         <outlet property="calendar" destination="IMh-ZJ-IFb" id="xT3-By-tcb"/>
+                        <outlet property="todayScheduleTableView" destination="lZK-pd-wM9" id="AJD-vu-pNV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kon-f5-5Aw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
