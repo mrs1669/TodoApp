@@ -10,21 +10,23 @@ import UIKit
 import RealmSwift
 import RxSwift
 
-class ToDoListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ToDoListViewController: UITableViewController{
     
     var addToDoListViewModel = AddToDoListViewModel()
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     var observable : Observable<String>!
     let disposeBag = DisposeBag()
-    @IBOutlet weak var tableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print(Realm.Configuration.defaultConfiguration.fileURL!) // realmファイルのパスを取得してrealm blowserで確認
-        tableView.delegate = self
-        tableView.dataSource = self
+        //tableView.register(UINib(nibName: "CustomToDoCell", bundle: nil), forCellReuseIdentifier: "CustomToDoCell")
+        tableView.allowsMultipleSelectionDuringEditing = true
+        //self.navigationController?.isNavigationBarHidden = false
+        //navigationItem.title = "title"
+        navigationItem.rightBarButtonItem = editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,23 +46,37 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.reloadData()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        tableView.isEditing = editing
+        print(editing)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.toDoLists.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomToDoCell") as? CustomToDoCell{
+            //cell.setToDoCell(todoList: self.toDoLists[indexPath.row].title, date: self.toDoLists[indexPath.row].date)
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoCell", for: indexPath)
         cell.textLabel?.text = self.toDoLists?[indexPath.row].title
         cell.detailTextLabel?.text = self.toDoLists[indexPath.row].date
         return cell
+        //}
+        //return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }*/
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true // trueを返すことでcellの編集を許可する
     }
     
     // cellをスワイプして削除
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete{
             
             let realm = try! Realm()

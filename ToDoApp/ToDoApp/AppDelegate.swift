@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //新しいスキーマバージョンを設定。以前に使用したものよりも大きくなければならない。
             //スキーマのバージョンを設定したことがない場合、バージョンは0。
-            schemaVersion : 1,
+            schemaVersion : 2,
             
             //スキーマのバージョンが上記のものよりも低い/を開くときに自動的に呼び出されるブロックを設定する
             migrationBlock : { migration, oldSchemaVersion in

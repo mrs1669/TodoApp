@@ -10,6 +10,9 @@
 		444B7510244C929900291578 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B750F244C929900291578 /* CalendarViewController.swift */; };
 		444B7512244C9B7500291578 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444B7511244C9B7500291578 /* CalendarViewModel.swift */; };
 		4479EC7E244DAB1B001D61AE /* AddToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479EC7D244DAB1B001D61AE /* AddToDoListViewModel.swift */; };
+		449F359E2450914F004C6BE9 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F359D2450914F004C6BE9 /* CheckBox.swift */; };
+		449F35A1245099BF004C6BE9 /* CustomToDoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 449F359F245099BF004C6BE9 /* CustomToDoCell.xib */; };
+		449F35A2245099BF004C6BE9 /* CustomToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F35A0245099BF004C6BE9 /* CustomToDoCell.swift */; };
 		44A53F59243B159700A84E77 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A53F58243B159700A84E77 /* ToDoListViewController.swift */; };
 		44A53F5B243B1B6900A84E77 /* ToDoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A53F5A243B1B6900A84E77 /* ToDoModel.swift */; };
 		44A53F5D243B1FA400A84E77 /* AddToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A53F5C243B1FA400A84E77 /* AddToDoListViewController.swift */; };
@@ -25,6 +28,9 @@
 		444B750F244C929900291578 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		444B7511244C9B7500291578 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		4479EC7D244DAB1B001D61AE /* AddToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoListViewModel.swift; sourceTree = "<group>"; };
+		449F359D2450914F004C6BE9 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		449F359F245099BF004C6BE9 /* CustomToDoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomToDoCell.xib; sourceTree = "<group>"; };
+		449F35A0245099BF004C6BE9 /* CustomToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToDoCell.swift; sourceTree = "<group>"; };
 		44A53F58243B159700A84E77 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		44A53F5A243B1B6900A84E77 /* ToDoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoModel.swift; sourceTree = "<group>"; };
 		44A53F5C243B1FA400A84E77 /* AddToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoListViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +82,10 @@
 				44C0856D243A071A008CD46B /* AppDelegate.swift */,
 				44C0856F243A071A008CD46B /* SceneDelegate.swift */,
 				44C08573243A071A008CD46B /* Main.storyboard */,
+				449F359F245099BF004C6BE9 /* CustomToDoCell.xib */,
+				449F35A0245099BF004C6BE9 /* CustomToDoCell.swift */,
 				444B750F244C929900291578 /* CalendarViewController.swift */,
+				449F359D2450914F004C6BE9 /* CheckBox.swift */,
 				444B7511244C9B7500291578 /* CalendarViewModel.swift */,
 				44A53F5C243B1FA400A84E77 /* AddToDoListViewController.swift */,
 				4479EC7D244DAB1B001D61AE /* AddToDoListViewModel.swift */,
@@ -166,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				449F35A1245099BF004C6BE9 /* CustomToDoCell.xib in Resources */,
 				44C0857A243A0727008CD46B /* LaunchScreen.storyboard in Resources */,
 				44C08577243A0727008CD46B /* Assets.xcassets in Resources */,
 				44C08575243A071A008CD46B /* Main.storyboard in Resources */,
@@ -223,9 +233,11 @@
 			files = (
 				444B7510244C929900291578 /* CalendarViewController.swift in Sources */,
 				44C0856E243A071A008CD46B /* AppDelegate.swift in Sources */,
+				449F359E2450914F004C6BE9 /* CheckBox.swift in Sources */,
 				44A53F5D243B1FA400A84E77 /* AddToDoListViewController.swift in Sources */,
 				44A53F5B243B1B6900A84E77 /* ToDoModel.swift in Sources */,
 				4479EC7E244DAB1B001D61AE /* AddToDoListViewModel.swift in Sources */,
+				449F35A2245099BF004C6BE9 /* CustomToDoCell.swift in Sources */,
 				44A53F59243B159700A84E77 /* ToDoListViewController.swift in Sources */,
 				44C08570243A071A008CD46B /* SceneDelegate.swift in Sources */,
 				444B7512244C9B7500291578 /* CalendarViewModel.swift in Sources */,
