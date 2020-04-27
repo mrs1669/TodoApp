@@ -17,7 +17,7 @@ class AddToDoListViewModel {
         return Observable.create({ observer in
             
             let realm = try! Realm()
-            self.toDoLists = realm.objects(ToDoModel.self)
+            self.toDoLists = realm.objects(ToDoModel.self).sorted(byKeyPath: "order")
             
             observer.onNext(self.toDoLists)
             observer.onCompleted()

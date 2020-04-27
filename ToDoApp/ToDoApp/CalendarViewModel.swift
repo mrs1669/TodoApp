@@ -59,7 +59,7 @@ class CalendarViewModel {
     // つまりは、予定のある日だけのデータを抽出する。
     func searchToDoList(date : Date) -> Results<ToDoModel>{
         let realm = try! Realm()
-        self.toDoLists = realm.objects(ToDoModel.self)
+        self.toDoLists = realm.objects(ToDoModel.self).sorted(byKeyPath: "order")
         let todayFilter = "\(self.getYear(date: date))/\(self.getMonth(date: date))/\(self.getDay(date: date))"
         self.toDoLists = self.toDoLists.filter("date LIKE '\(todayFilter)*' ")
         

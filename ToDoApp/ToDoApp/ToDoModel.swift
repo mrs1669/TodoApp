@@ -12,4 +12,5 @@ import RealmSwift
 class ToDoModel : Object {
     @objc dynamic var title = ""
     @objc dynamic var date = ""
+    @objc dynamic var order = 0 // 並べ替えのためのカラム
 }
