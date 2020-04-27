@@ -49,7 +49,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="q6p-ss-imZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Calendar" id="sCI-kg-Mjs"/>
+                    <tabBarItem key="tabBarItem" title="Calendar" image="calendar" catalog="system" selectedImage="calendar" id="sCI-kg-Mjs"/>
                     <connections>
                         <outlet property="calendar" destination="IMh-ZJ-IFb" id="xT3-By-tcb"/>
                         <outlet property="todayScheduleTableView" destination="lZK-pd-wM9" id="AJD-vu-pNV"/>
@@ -108,7 +108,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Bb6-eo-cyv"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add" id="tBL-Ou-kaW"/>
+                    <tabBarItem key="tabBarItem" title="Add" image="square.and.pencil" catalog="system" selectedImage="square.and.pencil" id="tBL-Ou-kaW"/>
                     <connections>
                         <outlet property="checkButton" destination="h2D-3B-Gjk" id="hJc-1m-SCi"/>
                         <outlet property="dateLabel" destination="bvO-8A-Kcg" id="pEK-Rg-EFS"/>
@@ -174,7 +174,7 @@
         <scene sceneID="q1d-eN-dez">
             <objects>
                 <navigationController id="oQU-7d-6kO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="ToDoList" id="Xio-ON-H4I"/>
+                    <tabBarItem key="tabBarItem" title="ToDoList" image="list.dash" catalog="system" selectedImage="list.dash" id="Xio-ON-H4I"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GqD-HR-lhm">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -207,4 +207,9 @@
             <point key="canvasLocation" x="-1017" y="1040"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
+    </resources>
 </document>
