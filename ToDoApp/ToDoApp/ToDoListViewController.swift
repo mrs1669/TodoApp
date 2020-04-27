@@ -49,15 +49,25 @@ class ToDoListViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.toDoLists.count == 0{
+            tableView.separatorStyle = .none // 罫線を削除
+            debugPrint("toDoLists.count:\(toDoLists.count)")
+        }
+        else{
+            tableView.separatorStyle = .singleLine // 罫線を引く
+            debugPrint("toDoLists.count:\(toDoLists.count)")
+        }
         return self.toDoLists.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomToDoCell") as? CustomToDoCell{
             //cell.setToDoCell(todoList: self.toDoLists[indexPath.row].title, date: self.toDoLists[indexPath.row].date)
+        print(self.toDoLists.count)
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoCell", for: indexPath)
         cell.textLabel?.text = self.toDoLists?[indexPath.row].title
         cell.detailTextLabel?.text = self.toDoLists[indexPath.row].date
+        self.tableView.tableFooterView = UIView() // 空のセルの罫線を消す。
         return cell
         //}
         //return UITableViewCell()
