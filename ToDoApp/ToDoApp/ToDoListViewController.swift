@@ -17,6 +17,7 @@ class ToDoListViewController: UITableViewController{
     var observable : Observable<String>!
     let disposeBag = DisposeBag()
     let realm = try! Realm()
+    let noToDoMessage = ["ToDoはありません"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,7 @@ class ToDoListViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.toDoLists.count == 0{
+        if self.toDoLists.isEmpty{
             tableView.separatorStyle = .none // 罫線を削除
             debugPrint("toDoLists.count:\(toDoLists.count)")
         }
@@ -63,12 +64,21 @@ class ToDoListViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomToDoCell") as? CustomToDoCell{
             //cell.setToDoCell(todoList: self.toDoLists[indexPath.row].title, date: self.toDoLists[indexPath.row].date)
-        print(self.toDoLists.count)
+        /*let noToDoMessageCell = tableView.dequeueReusableCell(withIdentifier: "toDoCell", for: indexPath)
+        if self.toDoLists.count == 0{
+            noToDoMessageCell.textLabel?.text = self.noToDoMessage[indexPath.row]
+            noToDoMessageCell.detailTextLabel?.text = ""
+            return noToDoMessageCell
+        }
+        else{
+        }*/
+        //print(self.toDoLists.count)
         let cell = tableView.dequeueReusableCell(withIdentifier: "toDoCell", for: indexPath)
         cell.textLabel?.text = self.toDoLists?[indexPath.row].title
         cell.detailTextLabel?.text = self.toDoLists[indexPath.row].date
         self.tableView.tableFooterView = UIView() // 空のセルの罫線を消す。
         return cell
+        
         //}
         //return UITableViewCell()
     }
@@ -94,7 +104,7 @@ class ToDoListViewController: UITableViewController{
             
             if sourceIndexPath.row < destinationIndexPath.row{
                 // 上から下にcellを移動したとき、間にあるcellを上にシフトさせる
-                for index in sourceIndexPath.row ..< destinationIndexPath.row {
+                for index in sourceIndexPath.row ... destinationIndexPath.row {
                     let toDoList = toDoLists[index]
                     toDoList.order -= 1
                     print("toDoList.order:\(toDoList.order)")
