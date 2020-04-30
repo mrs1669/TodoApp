@@ -9,15 +9,15 @@
 import UIKit
 import RealmSwift
 import RxSwift
+import DZNEmptyDataSet
 
-class ToDoListViewController: UITableViewController{
+class ToDoListViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     
     var addToDoListViewModel = AddToDoListViewModel()
     var toDoLists : Results<ToDoModel>! //Realmから受け取るデータを入れる
     var observable : Observable<String>!
     let disposeBag = DisposeBag()
     let realm = try! Realm()
-    let noToDoMessage = ["ToDoはありません"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,8 @@ class ToDoListViewController: UITableViewController{
         //tableView.register(UINib(nibName: "CustomToDoCell", bundle: nil), forCellReuseIdentifier: "CustomToDoCell")
         //tableView.allowsMultipleSelectionDuringEditing = true
         navigationItem.rightBarButtonItem = editButtonItem
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +49,10 @@ class ToDoListViewController: UITableViewController{
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: true)
         tableView.isEditing = editing
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "ToDoはありません")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
