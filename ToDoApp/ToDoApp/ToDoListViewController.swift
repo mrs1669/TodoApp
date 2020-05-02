@@ -55,6 +55,10 @@ class ToDoListViewController: UITableViewController, DZNEmptyDataSetSource, DZNE
         return NSAttributedString(string: "ToDoはありません")
     }
     
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return  UIColor(red: 232/255, green: 236/255, blue: 241/255, alpha: 1.0)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.toDoLists.isEmpty{
             tableView.separatorStyle = .none // 罫線を削除

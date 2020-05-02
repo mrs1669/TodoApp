@@ -10,8 +10,9 @@ import UIKit
 import RealmSwift
 import FSCalendar
 import CalculateCalendarLogic
+import DZNEmptyDataSet
 
-class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance, UITableViewDelegate, UITableViewDataSource {
+class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var todayScheduleTableView: UITableView!
@@ -29,6 +30,8 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         calendar.appearance.headerDateFormat = "yyyy年MM月"
         todayScheduleTableView.delegate = self
         todayScheduleTableView.dataSource = self
+        todayScheduleTableView.emptyDataSetSource = self
+        todayScheduleTableView.emptyDataSetDelegate = self
         
         for (key, value) in self.dayOfTheWeeks {
             self.calendar.calendarWeekdayView.weekdayLabels[value].text = key
@@ -79,13 +82,28 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         return plansToDoLists.count
     }
     
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "この日の予定はありません")
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return  UIColor(red: 232/255, green: 236/255, blue: 241/255, alpha: 1.0)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if toDoLists.count == 0{
+            tableView.separatorStyle = .none // 罫線を削除
+        }
+        else{
+            tableView.separatorStyle = .singleLine
+        }
         return toDoLists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = todayScheduleTableView.dequeueReusableCell(withIdentifier: "todayScheduleCell", for: indexPath)
         cell.textLabel?.text = toDoLists[indexPath.row].title
+        tableView.tableFooterView = UIView() // 空のセルの罫線を消す。
         return cell
     }
     
