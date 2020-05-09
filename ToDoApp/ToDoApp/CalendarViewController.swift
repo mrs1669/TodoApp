@@ -16,6 +16,8 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var todayScheduleTableView: UITableView!
+    @IBOutlet weak var dayLable: UILabel!
+    
     let calendarViewModel = CalendarViewModel()
     let dayOfTheWeeks = ["日":0, "月":1, "火":2, "水":3, "木":4, "金":5, "土":6]
     var toDoLists : Results<ToDoModel>!
@@ -71,8 +73,12 @@ class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     // カレンダーのタップイベント
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         toDoLists = calendarViewModel.searchToDoList(date: date)
-        print(toDoLists as Any)
+        //print(toDoLists as Any)
         self.todayScheduleTableView.reloadData()
+        let tmpDate = Calendar(identifier: .gregorian)
+        let month = tmpDate.component(.month, from: date)
+        let day = tmpDate.component(.day, from: date)
+        dayLable.text = "\(month)月\(day)日の予定"
     }
     
     // 予定がある日にカレンダーに点を描画

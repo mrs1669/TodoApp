@@ -53,6 +53,7 @@
                     <navigationItem key="navigationItem" title="Calendar" id="bcm-1N-jns"/>
                     <connections>
                         <outlet property="calendar" destination="IMh-ZJ-IFb" id="xT3-By-tcb"/>
+                        <outlet property="dayLable" destination="1xp-os-jqv" id="k0K-Tz-dcp"/>
                         <outlet property="todayScheduleTableView" destination="lZK-pd-wM9" id="AJD-vu-pNV"/>
                     </connections>
                 </viewController>

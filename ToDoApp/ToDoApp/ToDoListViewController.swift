@@ -62,11 +62,11 @@ class ToDoListViewController: UITableViewController, DZNEmptyDataSetSource, DZNE
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.toDoLists.isEmpty{
             tableView.separatorStyle = .none // 罫線を削除
-            debugPrint("toDoLists.count:\(toDoLists.count)")
+            //debugPrint("toDoLists.count:\(toDoLists.count)")
         }
         else{
             tableView.separatorStyle = .singleLine // 罫線を引く
-            debugPrint("toDoLists.count:\(toDoLists.count)")
+            //debugPrint("toDoLists.count:\(toDoLists.count)")
         }
         return self.toDoLists.count
     }
@@ -117,7 +117,7 @@ class ToDoListViewController: UITableViewController, DZNEmptyDataSetSource, DZNE
                 for index in sourceIndexPath.row ... destinationIndexPath.row {
                     let toDoList = toDoLists[index]
                     toDoList.order -= 1
-                    print("toDoList.order:\(toDoList.order)")
+                    //print("toDoList.order:\(toDoList.order)")
                 }
             }
             else{
